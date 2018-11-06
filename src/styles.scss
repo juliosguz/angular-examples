@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~normalize.css/normalize.css';
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  &__header {
+    align-items: center;
+    justify-content: center;
+    margin: 1em 0;
+  }
+
+  &__title {
+    h1, h4 {
+      margin: 0;
+    }
+    h4 {
+      margin-top: .5em;
+      font-weight: 100;
+      text-align: right;
+    }
+  }
+
+  &__logo {
+    width: 6.25em;
+    margin: 0;
+    img {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    margin: 0 auto;
+    max-width: 43.75em;
+  }
+
+  &__link {
+    color: #f50024;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
