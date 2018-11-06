@@ -1,0 +1,17 @@
+<form #animalForm="ngForm" (submit)="submit()">
+  <div class="form__input" >
+    <label for="name">Animal Name</label>
+    <input type="text" name="name" id="name" [(ngModel)]="animal.name" required >
+  </div>
+  <div class="form__input" >
+    <label for="type">Animal Type</label>
+    <!-- Template Driven: Se agrega ngModel con enlace bidireccional (two way data binding) -->
+    <input type="text" name="type" id="type" [(ngModel)]="animal.type" required >
+  </div>
+
+  <!-- 
+    Template Driven: 
+    Usar la verificación del formulario para habilitar o deshabilitar el boton
+  -->
+  <button type="submit" [disabled]="!animalForm.valid">Enviar</button>
+</form>
