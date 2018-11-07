@@ -1,17 +1,66 @@
-<form #animalForm="ngForm" (submit)="submit()">
+<form action="" class="form">
+  <h2>Sin [(ngModel)] explicitamente</h2>
+  <div class="form__input">
+    <label for="name">Sin ngModel</label>
+    <input
+      [value]="withoutNgModel"
+      (input)="withoutNgModel=$event.target.value" >
+  </div>
+  <div class="form__input">
+    <p>{{ withoutNgModel }}</p>
+  </div>
+  <div class="form__input">
+    <label for="name">Con ngModel separado</label>
+    <input
+      name="withNgModel"
+      [ngModel]="withNgModel"
+      (ngModelChange)="withNgModel=$event" >
+  </div>
+  <div class="form__input">
+    <p>{{ withNgModel }}</p>
+  </div>
+</form>
+
+<!-- 
+  Template Driven:
+  Si usas un formulario, tus inputs deben tener el atributo name, sino te lanzara un error.
+ -->
+
+<form
+  class="form"
+  #animalForm="ngForm"
+  (ngSubmit)="submit(animalForm)"
+>
+  <h2>Con [(ngModel)]</h2>
   <div class="form__input" >
     <label for="name">Animal Name</label>
-    <input type="text" name="name" id="name" [(ngModel)]="animal.name" required >
+    <!-- 
+      Template Driven:
+      Se agrega ngModel con enlace bidireccional (two way data binding).
+    -->
+    <input
+      type="text"
+      name="name"
+      id="name"
+      [(ngModel)]="animal.name" 
+      required >
   </div>
   <div class="form__input" >
     <label for="type">Animal Type</label>
-    <!-- Template Driven: Se agrega ngModel con enlace bidireccional (two way data binding) -->
-    <input type="text" name="type" id="type" [(ngModel)]="animal.type" required >
+    <!-- <input type="text" name="type" id="type" [(ngModel)]="animal.type" required > -->
+    <select name="type" id="type">
+      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+    </select>
   </div>
 
   <!-- 
     Template Driven: 
     Usar la verificación del formulario para habilitar o deshabilitar el boton
   -->
-  <button type="submit" [disabled]="!animalForm.valid">Enviar</button>
+  <button 
+    type="submit"
+  >
+    <!-- [disabled]="!animalForm.valid" -->
+    Enviar
+  </button>
 </form>

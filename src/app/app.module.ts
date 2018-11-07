@@ -17,6 +17,7 @@ import { TemplateDrivenComponent } from './template-driven/template-driven.compo
   ],
   imports: [
     BrowserModule,
+    // Template Driven: Debes agregar el formulario en imports para tenerlo disponible
     FormsModule,
     AppRoutingModule
   ],

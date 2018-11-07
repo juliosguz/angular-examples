@@ -13,17 +13,29 @@ interface Animal {
 export class TemplateDrivenComponent implements OnInit {
 
   animal: Animal = {
-    name: '',
-    type: ''
+    name: 'Perro',
+    type: 'Dog'
   };
+
+  withoutNgModel = 'Sin Ng Model';
+  withNgModel = 'Con Ng Model';
+
+  types = [
+    'Mamíferos',
+    'Peces',
+    'Aves',
+    'Reptiles',
+    'Anfibios'
+  ];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  submit() {
+  submit(form) {
     console.log(this.animal);
+    console.log(form);
   }
 
 }
