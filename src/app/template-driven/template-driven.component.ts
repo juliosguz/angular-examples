@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 interface Animal {
   name: string;
-  type: string;
+  type?: string;
 }
 
 @Component({
@@ -14,18 +14,19 @@ export class TemplateDrivenComponent implements OnInit {
 
   animal: Animal = {
     name: 'Perro',
-    type: 'Dog'
+    type: 'mamiferos'
   };
 
   withoutNgModel = 'Sin Ng Model';
   withNgModel = 'Con Ng Model';
+  withNgModelB = 'Con Ng ModelB';
 
   types = [
-    'Mamíferos',
-    'Peces',
-    'Aves',
-    'Reptiles',
-    'Anfibios'
+    'mamiferos',
+    'peces',
+    'aves',
+    'reptiles',
+    'anfibios'
   ];
 
   constructor() { }
@@ -36,6 +37,11 @@ export class TemplateDrivenComponent implements OnInit {
   submit(form) {
     console.log(this.animal);
     console.log(form);
+  }
+
+  verify(form) {
+    console.log('form', form);
+    console.log('form.value', form.value);
   }
 
 }

@@ -1,8 +1,9 @@
 <form action="" class="form">
   <h2>Sin [(ngModel)] explicitamente</h2>
   <div class="form__input">
-    <label for="name">Sin ngModel</label>
+    <label for="withoutNgModel">Sin ngModel</label>
     <input
+      id="withoutNgModel"
       [value]="withoutNgModel"
       (input)="withoutNgModel=$event.target.value" >
   </div>
@@ -10,14 +11,25 @@
     <p>{{ withoutNgModel }}</p>
   </div>
   <div class="form__input">
-    <label for="name">Con ngModel separado</label>
+    <label for="withNgModel">Con ngModel separado</label>
     <input
+      id="withNgModel"
       name="withNgModel"
       [ngModel]="withNgModel"
       (ngModelChange)="withNgModel=$event" >
   </div>
   <div class="form__input">
     <p>{{ withNgModel }}</p>
+  </div>
+  <div class="form__input">
+    <label for="withNgModelB">Con ngModel + babana box syntax</label>
+    <input
+      id="withNgModelB"
+      name="withNgModelB"
+      [(ngModel)]="withNgModelB">
+  </div>
+  <div class="form__input">
+    <p>{{ withNgModelB }}</p>
   </div>
 </form>
 
@@ -30,6 +42,7 @@
   class="form"
   #animalForm="ngForm"
   (ngSubmit)="submit(animalForm)"
+  autocomplete="off"
 >
   <h2>Con [(ngModel)]</h2>
   <div class="form__input" >
@@ -42,15 +55,29 @@
       type="text"
       name="name"
       id="name"
-      [(ngModel)]="animal.name" 
+      #animalName
+      [(ngModel)]="animal.name"
       required >
+  </div>
+  <div class="form__input">
+    <p>{{ animalName.className }}</p>
+    <p>{{ animalName }}</p>
   </div>
   <div class="form__input" >
     <label for="type">Animal Type</label>
     <!-- <input type="text" name="type" id="type" [(ngModel)]="animal.type" required > -->
-    <select name="type" id="type">
+    <select 
+      name="type"
+      id="type"
+      [(ngModel)]="animal.type"
+      #animalType="ngModel"
+    >
       <option *ngFor="let type of types" [value]="type">{{ type }}</option>
     </select>
+  </div>
+  <div class="form__input">
+    <p>{{ animalType.value }}</p>
+    <p>{{ animalType.valid }}</p>
   </div>
 
   <!-- 
@@ -59,8 +86,29 @@
   -->
   <button 
     type="submit"
+    [disabled]="!animalForm.valid"
   >
-    <!-- [disabled]="!animalForm.valid" -->
     Enviar
   </button>
+</form>
+
+<form
+  class="form"
+  #animalForm2="ngForm"
+  autocomplete="off"
+>
+  <h2>Solo con ngModel</h2>
+  <div class="form__input" >
+    <label for="name2">Animal Name 2</label>
+    <input
+      type="text"
+      name="name2"
+      id="name2"
+      ngModel
+      required >
+  </div>
+  <div class="form__input">
+    <button (click)="verify(animalForm2)">Verificar valores</button>
+  </div>
+  {{ animalForm2.value | json }}
 </form>
